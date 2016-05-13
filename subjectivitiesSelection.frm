@@ -36,13 +36,13 @@ Private Sub btnSubmit_Click()
     Set ObjSelectedItem = Outlook.ActiveExplorer.Selection.item(1)
 	
     If TypeName(ObjSelectedItem) = "MailItem" Then
-		If ObjSelectedItem.SenderEmailType = "EX" Then
-			senderEmail = ObjSelectedItem.Sender.GetExchangeUser.PrimarySmtpAddress
-		Else
-			senderEmail = ObjSelectedItem.SenderEmailAddress
-		End If
+	If ObjSelectedItem.SenderEmailType = "EX" Then
+		senderEmail = ObjSelectedItem.Sender.GetExchangeUser.PrimarySmtpAddress
+	Else
+		senderEmail = ObjSelectedItem.SenderEmailAddress
+	End If
     Else
-		MsgBox ("No items selected (OR) Selected item not a MailItem.")
+	MsgBox ("No items selected (OR) Selected item not a MailItem.")
     End If
     Set ObjSelectedItem = Nothing
  
@@ -104,7 +104,7 @@ End Function
 Private Sub Userform_Initialize()
     With List1
         .AddItem "5 year clean loss runs or warranty statement completed signed and dated in lieu of loss runs"
-        .AddItem "A copy of the applicant’s resume"
+        .AddItem "A copy of the applicantâ€™s resume"
         .AddItem "A copy of the expiring declaration page evidencing retroactive date"
         .AddItem "A copy of the standard contract including the scope of services"
         .AddItem "A fully completed, signed and dated AIG application, dated no more than 30 days prior to the effective date of coverage"
