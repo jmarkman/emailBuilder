@@ -37,9 +37,9 @@ Private Sub btnSubmit_Click()
 	
     If TypeName(ObjSelectedItem) = "MailItem" Then
 	If ObjSelectedItem.SenderEmailType = "EX" Then
-		senderEmail = ObjSelectedItem.Sender.GetExchangeUser.PrimarySmtpAddress
+	senderEmail = ObjSelectedItem.Sender.GetExchangeUser.PrimarySmtpAddress
 	Else
-		senderEmail = ObjSelectedItem.SenderEmailAddress
+	senderEmail = ObjSelectedItem.SenderEmailAddress
 	End If
     Else
 	MsgBox ("No items selected (OR) Selected item not a MailItem.")
