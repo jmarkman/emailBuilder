@@ -10,7 +10,7 @@ Private Sub btnSubmit_Click()
     StrSignature = GetSignature(Environ("Userprofile") & "\AppData\Roaming\Microsoft\Signatures\CorRisk.htm")
     
     Dim myAttach(0 To 14) As Variant
-    
+    ' Declare the attachments that will correspond to the selections in the userform
     myAttach(0) = "[filepath]"
     myAttach(1) = "[filepath]"
     myAttach(2) = "[filepath]"
@@ -26,15 +26,15 @@ Private Sub btnSubmit_Click()
     myAttach(12) = "[filepath]"
     myAttach(13) = "[filepath]"
     myAttach(14) = "[filepath]"
-                  
+    
+    ' Get currently open email                
     Dim followUp As Outlook.MailItem
     Dim myinspector As Outlook.Inspector
-        
     Set myinspector = Application.ActiveInspector
     Set followUp = myinspector.CurrentItem.Forward
- 
+    
+    ' Get original sender's email
     Set ObjSelectedItem = Outlook.ActiveExplorer.Selection.item(1)
-	
     If TypeName(ObjSelectedItem) = "MailItem" Then
 	If ObjSelectedItem.SenderEmailType = "EX" Then
 	senderEmail = ObjSelectedItem.Sender.GetExchangeUser.PrimarySmtpAddress
@@ -45,7 +45,8 @@ Private Sub btnSubmit_Click()
 	MsgBox ("No items selected (OR) Selected item not a MailItem.")
     End If
     Set ObjSelectedItem = Nothing
- 
+    
+    ' Determine greeting to use
     If time > #12:00:00 AM# And time <= #11:59:59 AM# Then
         greeting = "Good Morning"
     ElseIf time >= #12:00:00 PM# And time < #5:00:00 PM# Then
@@ -84,7 +85,6 @@ Private Sub btnSubmit_Click()
         .Forward
         .To = senderEmail
         '.SentOnBehalfOfName = "[user]@corrisk.com"
-        '.Recipients.Add()
         .HTMLBody = msg & vbNewLine + StrSignature + .HTMLBody
         Unload Me
         .Display
